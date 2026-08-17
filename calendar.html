@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Calendar</title>
+</head>
+
+<body>
+
+<h1>📅 Financial Calendar</h1>
+
+<h2>Upcoming Bills</h2>
+
+{% if bills %}
+
+    <ul>
+    {% for bill in bills %}
+        <li>
+            {{ bill['bill_name'] }} -
+            ₹{{ bill['amount'] }} -
+            {{ bill['due_date'] }}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+
+<p>No upcoming bills.</p>
+
+{% endif %}
+
+
+<h2>Financial Goals</h2>
+
+{% if goals %}
+
+    <ul>
+    {% for goal in goals %}
+        <li>
+            {{ goal['goal_name'] }} -
+            {{ goal['target_date'] }}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+
+<p>No goals found.</p>
+
+{% endif %}
+
+</body>
+</html>

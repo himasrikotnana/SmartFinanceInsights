@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback - Smart Finance Insights</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/feedback.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Investment Portfolio</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/goals">🎯 Financial Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/bills">💳 Bill Reminder</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/feedback" class="active">💬 Feedback</a>
+        <a href="/settings">⚙️ Settings</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main">
+
+        <div class="feedback-header">
+
+            <span class="feedback-icon">💬</span>
+
+            <div>
+                <h1>We Value Your Feedback</h1>
+
+                <p>
+                    Help us improve Smart Finance Insights.
+                    Your feedback helps us make the experience better.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- FEEDBACK CARD -->
+
+        <div class="feedback-card">
+
+            <div class="card-header">
+
+                <h2>Share Your Experience</h2>
+
+                <p>
+                    Tell us what you think about the application.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+
+                <!-- RATING -->
+
+                <div class="form-group">
+
+                    <label>
+                        How would you rate your experience?
+                    </label>
+
+                    <div class="rating">
+
+                        <input type="radio"
+                               id="star5"
+                               name="rating"
+                               value="5"
+                               required>
+
+                        <label for="star5">★</label>
+
+
+                        <input type="radio"
+                               id="star4"
+                               name="rating"
+                               value="4">
+
+                        <label for="star4">★</label>
+
+
+                        <input type="radio"
+                               id="star3"
+                               name="rating"
+                               value="3">
+
+                        <label for="star3">★</label>
+
+
+                        <input type="radio"
+                               id="star2"
+                               name="rating"
+                               value="2">
+
+                        <label for="star2">★</label>
+
+
+                        <input type="radio"
+                               id="star1"
+                               name="rating"
+                               value="1">
+
+                        <label for="star1">★</label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Your Feedback
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Tell us what you liked, what can be improved, or any suggestions you have..."
+                        required></textarea>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button type="submit"
+                        class="submit-btn">
+
+                    Send Feedback
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- THANK YOU MESSAGE -->
+
+        <div class="feedback-note">
+
+            <span>💙</span>
+
+            <div>
+
+                <strong>Thank you for helping us improve!</strong>
+
+                <p>
+                    Every suggestion helps us build a smarter
+                    financial management experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

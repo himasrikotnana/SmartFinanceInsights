@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Portfolio</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/goals">🎯 Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+    <div class="main">
+
+        <h1>My Profile</h1>
+
+        <form method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                value="{{ username }}"
+                readonly
+            >
+
+            <label>Phone Number</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="{{ profile.phone if profile else '' }}"
+            >
+
+            <label>Date of Birth</label>
+
+            <input
+                type="date"
+                name="dob"
+                value="{{ profile.dob if profile else '' }}"
+            >
+
+            <label>Occupation</label>
+
+            <input
+                type="text"
+                name="occupation"
+                value="{{ profile.occupation if profile else '' }}"
+            >
+
+            <label>Monthly Income</label>
+
+            <input
+                type="number"
+                name="monthly_income"
+                value="{{ profile.monthly_income if profile else '' }}"
+            >
+
+            <label>Risk Level</label>
+
+            <select name="risk_level">
+
+                <option>Low</option>
+
+                <option>Medium</option>
+
+                <option>High</option>
+
+            </select>
+
+            <br><br>
+
+            <button type="submit">
+
+                Save Profile
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

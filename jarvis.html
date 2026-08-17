@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JARVIS - Smart Finance Insights</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/jarvis.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Investment Portfolio</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/goals">🎯 Financial Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/bills">💳 Bill Reminder</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/feedback">💬 Feedback</a>
+        <a href="/jarvis" class="active">🧠 JARVIS</a>
+        <a href="/settings">⚙️ Settings</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="jarvis-header">
+
+            <div class="jarvis-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h1>JARVIS</h1>
+
+                <p>
+                    Your personal financial assistant
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAT CARD -->
+
+        <div class="chat-card">
+
+            <div class="welcome-message">
+
+                <div class="bot-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h3>
+                        Hello, {{ username }}! 👋
+                    </h3>
+
+                    <p>
+                        I'm JARVIS. I can help you understand
+                        your finances.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if answer %}
+
+            <div class="answer-box">
+
+                <div class="bot-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <strong>JARVIS</strong>
+
+                    <p>
+                        {{ answer | safe }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- QUESTION FORM -->
+
+            <form method="POST">
+
+                <div class="input-area">
+
+                    <input
+                        type="text"
+                        name="question"
+                        placeholder="Ask JARVIS about your finances..."
+                        required>
+
+                    <button type="submit">
+                        ➤
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- QUICK QUESTIONS -->
+
+            <div class="quick-section">
+
+                <h3>Quick Questions</h3>
+
+                <div class="quick-buttons">
+
+                    <button
+                        onclick="askQuestion('What is my income?')">
+                        💰 My Income
+                    </button>
+
+                    <button
+                        onclick="askQuestion('What are my expenses?')">
+                        💸 My Expenses
+                    </button>
+
+                    <button
+                        onclick="askQuestion('How much did I save?')">
+                        💵 My Savings
+                    </button>
+
+                    <button
+                        onclick="askQuestion('What is my budget?')">
+                        📊 My Budget
+                    </button>
+                    <button type="button" onclick="askJarvis('What are my goals?')">
+                        🎯 My Goals
+                    </button>
+
+                    <button type="button" onclick="askJarvis('What are my bills?')">
+                        🔔 My Bills
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-card">
+
+            <h3>💡 What can JARVIS do?</h3>
+
+            <div class="features">
+
+                <div>
+                    <span>💰</span>
+                    <p>Check your income</p>
+                </div>
+
+                <div>
+                    <span>💸</span>
+                    <p>Track your expenses</p>
+                </div>
+
+                <div>
+                    <span>💵</span>
+                    <p>Calculate your savings</p>
+                </div>
+
+                <div>
+                    <span>📊</span>
+                    <p>Check your budget</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function askQuestion(question) {
+
+    const input =
+        document.querySelector(
+            'input[name="question"]'
+        );
+
+    input.value = question;
+
+    input.form.submit();
+
+}
+
+</script>
+
+</body>
+
+</html>

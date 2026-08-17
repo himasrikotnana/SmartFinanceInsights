@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Finance Insights - Login</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left-section">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Logo"
+             class="logo">
+
+        <h1>SMART FINANCE<br>INSIGHTS</h1>
+
+        <p>
+            Manage your finances<br>
+            smartly and efficiently.
+        </p>
+    </div>
+
+    <div class="right-section">
+
+        <h2>Login</h2>
+
+        <form method="POST">
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email Address"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   required>
+
+            <div class="remember">
+                <input type="checkbox">
+                <label>Remember Me</label>
+            </div>
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <a href="#">Forgot Password?</a>
+
+        <p>
+            Don't have an account?
+            <a href="/register">Register Here</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

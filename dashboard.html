@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Finance Insights Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Investment Portfolio</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/goals">🎯 Financial Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/bills">💳 Bill Reminder</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/jarvis">🧠 JARVIS</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/feedback">💬 Feedback</a>
+        <a href="/settings">⚙️ Settings</a>
+        <a href="/calendar">📅 Financial Calendar</a>
+        <a href="/logout">🚪 Logout</a>
+
+        <div class="health-box">
+            <h3>Financial Health Score</h3>
+            <h1>82<span>/100</span></h1>
+            <p>Good</p>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="profile-card">
+
+    <div class="profile-left">
+
+        <div class="profile-avatar">
+            👤
+        </div>
+
+        <div>
+
+            <h2>{{ user['username'] }}</h2>
+
+            <p>{{ user['email'] }}</p>
+
+            <small>Welcome Back!</small>
+
+        </div>
+
+    </div>
+
+    <a href="/profile">
+        <button class="profile-btn">
+            View Profile
+        </button>
+    </a>
+
+</div>
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <div class="quick-actions">
+
+            <a href="/income">
+                <button class="action-btn">
+                    ➕ Add Income
+                </button>
+            </a>
+
+            <a href="/expense">
+                <button class="action-btn">
+                    💸 Add Expense
+                </button>
+            </a>
+
+            <a href="/goals">
+                <button class="action-btn">
+                    🎯 Add Goal
+                </button>
+            </a>
+
+            <a href="/portfolio">
+                <button class="action-btn">
+                    📈 Add Investment
+                </button>
+            </a>
+
+        </div>
+
+        <!-- Cards -->
+        <div class="cards">
+
+            <div class="card income-card">
+                <h3>Total Income</h3>
+                <h2>₹{{ income }}</h2>
+                <p>This Month</p>
+            </div>
+
+            <div class="card expense-card">
+                <h3>Total Expenses</h3>
+                <h2>₹{{ expense }}</h2>
+                <p>This Month</p>
+            </div>
+
+            <div class="card savings-card">
+                <h3>Savings</h3>
+                <h2>₹{{ savings }}</h2>
+                <p>This Month</p>
+            </div>
+
+            <div class="card budget-card">
+                <h3>Budget Status</h3>
+                <h2>{{ budget_percent }}%</h2>
+                <p>of monthly budget used</p>
+                <p>Budget: ₹{{ budget }}</p>
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+        <div class="chart-section">
+
+            <div class="chart-box">
+                <h3>Income vs Expenses</h3>
+                <br>
+                <canvas id="incomeExpenseChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h3>Expense by Category</h3>
+                <br>
+                <canvas id="expenseChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+
+            <!-- Recent Transactions -->
+            <div class="recent-box">
+
+                <h3>Recent Transactions</h3>
+
+                <ul>
+
+                    {% if recent_transactions %}
+
+                        {% for item in recent_transactions %}
+
+                        <li>
+
+                            {% if item['type'] == 'Income' %}
+
+                                💰 {{ item['name'] }}
+                                + ₹{{ item['amount'] }}
+
+                            {% else %}
+
+                                💸 {{ item['name'] }}
+                                - ₹{{ item['amount'] }}
+
+                            {% endif %}
+
+                            <br>
+
+                            <small>{{ item['date'] }}</small>
+
+                        </li>
+
+                        <hr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <li>No Transactions Found</li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+            <!-- Notifications -->
+
+            <div class="notification-box">
+
+                <h3>🔔 Notifications</h3>
+
+                <ul>
+
+                    {% for note in notifications %}
+
+                    <li>{{ note }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- Bills -->
+
+            <div class="bill-box">
+
+                <h3>🔔 Upcoming Bills</h3>
+
+                {% if upcoming_bills %}
+
+                    {% for bill in upcoming_bills %}
+
+                    <div class="bill-item">
+
+                        <strong>{{ bill['bill_name'] }}</strong><br>
+
+                        ₹{{ bill['amount'] }}<br>
+
+                        <small>Due: {{ bill['due_date'] }}</small>
+
+                    </div>
+
+                    <hr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>No upcoming bills.</p>
+
+                {% endif %}
+
+            </div>
+
+            <!-- Goals -->
+
+            <div class="goal-box">
+
+                <h3>🎯 Financial Goals</h3>
+
+                {% if goal_progress %}
+
+                    {% for goal in goal_progress %}
+
+                    <p>{{ goal.goal_name }}</p>
+
+                    <progress
+                        value="{{ goal.progress }}"
+                        max="100"
+                        style="width:100%;">
+                    </progress>
+
+                    <p>{{ goal.progress }}%</p>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>No Goals Added</p>
+
+                {% endif %}
+
+            </div>
+
+            <!-- AI -->
+
+            <div class="ai-box">
+
+                <h3>🤖 AI Financial Insight</h3>
+
+                <p>
+                    Monitor your expenses regularly and continue saving consistently.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Achievement Badges -->
+
+        <div class="badge-section">
+
+            <h2>🏆 Achievement Badges</h2>
+
+            <div class="badge-container">
+
+                {% for badge in badges %}
+
+                <div class="badge-card">
+
+                    {{ badge }}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const incomeExpense = document.getElementById('incomeExpenseChart');
+
+new Chart(incomeExpense, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: ['Income', 'Expense'],
+
+        datasets: [{
+
+            label: 'Amount',
+
+            data: [{{ income }}, {{ expense }}],
+
+            backgroundColor: ['#2ecc71','#e74c3c']
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: false,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+const expenseChart = document.getElementById('expenseChart');
+
+new Chart(expenseChart, {
+
+    type: 'pie',
+
+    data: {
+
+        labels: {{ labels | tojson }},
+
+        datasets: [{
+
+            data: {{ values | tojson }},
+
+            backgroundColor: [
+
+                '#3498db',
+                '#2ecc71',
+                '#f1c40f',
+                '#e74c3c',
+                '#9b59b6',
+                '#1abc9c',
+                '#34495e'
+
+            ]
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Financial Goals</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/goals.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>Smart Finance</h2>
+
+<a href="/dashboard">🏠 Dashboard</a>
+
+<a href="/portfolio">📈 Portfolio</a>
+
+<a href="/goals">🎯 Goals</a>
+
+<a href="/analytics">📊 Analytics</a>
+
+<a href="/logout">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Financial Goal Planning</h1>
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Goals</h3>
+        <h2>{{ goals|length }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Completed</h3>
+        <h2>
+            {{ goals|selectattr('status','equalto','Completed')|list|length }}
+        </h2>
+    </div>
+
+    <div class="card">
+        <h3>In Progress</h3>
+        <h2>
+            {{ goals|selectattr('status','equalto','In Progress')|list|length }}
+        </h2>
+    </div>
+
+</div>
+<form method="POST">
+
+<input
+type="text"
+name="goal_name"
+placeholder="Goal Name"
+required>
+
+<input
+type="number"
+name="target_amount"
+placeholder="Target Amount"
+required>
+
+<input
+type="number"
+name="saved_amount"
+placeholder="Saved Amount"
+required>
+
+<input
+type="date"
+name="target_date"
+required>
+
+<button>
+
+Add Goal
+
+</button>
+
+</form>
+
+<br>
+
+<table>
+
+<tr>
+
+<th>Goal</th>
+
+<th>Target</th>
+
+<th>Saved</th>
+
+<th>Progress</th>
+
+<th>Remaining</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+</tr>
+
+{% for goal in goals %}
+
+<tr>
+
+<td>{{ goal.goal_name }}</td>
+
+<td>₹{{ goal.target_amount }}</td>
+
+<td>₹{{ goal.saved_amount }}</td>
+
+<td>{{ goal.progress }}%</td>
+
+<td>₹{{ goal.remaining }}</td>
+
+<td>{{ goal.status }}</td>
+
+<td>{{ goal.target_date }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

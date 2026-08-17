@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Settings</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/settings.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Portfolio</a>
+        <a href="/goals">🎯 Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/bill_reminder">🔔 Bill Reminder</a>
+        <a href="/settings">⚙️ Settings</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main">
+
+        <div class="settings-container">
+
+            <h1>⚙️ Settings</h1>
+
+            <div class="setting-card">
+
+                <h3>👤 Edit Profile</h3>
+
+                <p>Update your username and email.</p>
+
+                <a href="/profile">
+                    <button>Edit Profile</button>
+                </a>
+
+            </div>
+
+            <div class="setting-card">
+
+                <h3>🔒 Change Password</h3>
+
+                <p>Keep your account secure by updating your password.</p>
+
+                <a href="/change_password">
+                    <button>Change Password</button>
+                </a>
+
+            </div>
+
+            <div class="setting-card">
+
+                <h3>🌙 Dark Mode</h3>
+
+                <p>Switch between Light and Dark themes.</p>
+
+                <button onclick="toggleDarkMode()">
+                    Toggle Dark Mode
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme","dark");
+
+    }
+
+    else{
+
+        localStorage.setItem("theme","light");
+
+    }
+
+}
+
+window.onload=function(){
+
+    if(localStorage.getItem("theme")=="dark"){
+
+        document.body.classList.add("dark-mode");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

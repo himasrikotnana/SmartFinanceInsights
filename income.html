@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Income Management</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/income.css') }}">
+</head>
+
+<body>
+{% include 'sidebar.html' %}
+<div class="container">
+
+    <h1>Income Management</h1>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="source"
+            placeholder="Income Source"
+            required>
+
+        <input
+            type="number"
+            name="amount"
+            placeholder="Amount"
+            required>
+
+        <input
+            type="date"
+            name="date"
+            required>
+
+        <button type="submit">
+            Add Income
+        </button>
+
+    </form>
+
+    <h2>Income History</h2>
+
+    <table>
+
+        <tr>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+
+        {% for i in incomes %}
+        <tr>
+            <td>{{ i['source'] }}</td>
+            <td>₹{{ i['amount'] }}</td>
+            <td>{{ i['date'] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

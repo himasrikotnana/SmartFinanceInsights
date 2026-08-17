@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Bill Reminder</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bill_reminder.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Portfolio</a>
+        <a href="/profile">👤 Profile</a>
+        <a href="/goals">🎯 Goals</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/bills">💳 Bill Reminder</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+    <div class="main">
+
+        <h1>Bill Reminder</h1>
+
+        <form method="POST">
+
+            <input type="text"
+                   name="bill_name"
+                   placeholder="Bill Name"
+                   required>
+
+            <input type="number"
+                   name="amount"
+                   placeholder="Amount"
+                   required>
+
+            <input type="date"
+                   name="due_date"
+                   required>
+
+            <select name="status">
+
+                <option>Pending</option>
+
+                <option>Paid</option>
+
+            </select>
+
+            <button type="submit">
+
+                Add Bill
+
+            </button>
+
+        </form>
+
+        <br><br>
+
+        <table width="100%" cellpadding="12">
+
+            <tr style="background:#0d2b7e;color:white;">
+
+                <th>Bill</th>
+                <th>Amount</th>
+                <th>Due Date</th>
+                <th>Status</th>
+
+            </tr>
+
+            {% for bill in bills %}
+
+            <tr>
+
+                <td>{{ bill['bill_name'] }}</td>
+
+                <td>₹{{ bill['amount'] }}</td>
+
+                <td>{{ bill['due_date'] }}</td>
+
+                <td>{{ bill['status'] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Portfolio Analytics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/analytics.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>Smart Finance<br>Insights</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a href="/income">💰 Income</a>
+        <a href="/expense">💸 Expenses</a>
+        <a href="/budget">📊 Budget</a>
+        <a href="/portfolio">📈 Investment Portfolio</a>
+        <a href="/goals">🎯 Financial Goals</a>
+        <a href="/analytics">📈 Analytics</a>
+        <a href="/reports">📑 Reports</a>
+        <a href="/insights">🤖 AI Insights</a>
+        <a href="/health">❤️ Health Score</a>
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <h1>Portfolio Analytics Dashboard</h1>
+
+        <!-- Summary Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Investment</h3>
+                <h2>₹{{ total }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Current Value</h3>
+                <h2>₹{{ current }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Profit / Loss</h3>
+                <h2>₹{{ profit }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Return %</h3>
+                <h2>{{ roi }}%</h2>
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+
+        <div class="chart-section">
+
+            <div class="chart-box">
+
+                <h3>Portfolio Growth</h3>
+
+                <canvas id="growthChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h3>Asset Allocation</h3>
+
+                <canvas id="allocationChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <!-- Portfolio Summary -->
+
+        <div class="chart-box">
+
+            <h3>Portfolio Summary</h3>
+
+            <table width="100%" cellpadding="12">
+
+                <tr style="background:#0d2b7e;color:white;">
+                    <th>Asset Name</th>
+                    <th>Category</th>
+                    <th>Investment</th>
+                    <th>Current Value</th>
+                    <th>Profit / Loss</th>
+                </tr>
+
+                {% for item in portfolio %}
+
+                <tr>
+
+                    <td>{{ item['asset_name'] }}</td>
+
+                    <td>{{ item['category'] }}</td>
+
+                    <td>₹{{ item['invested_amount'] }}</td>
+
+                    <td>₹{{ item['current_value'] }}</td>
+
+                    <td>₹{{ item['current_value'] - item['invested_amount'] }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// Portfolio Growth Chart
+
+new Chart(document.getElementById("growthChart"), {
+
+    type: "line",
+
+    data: {
+
+        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
+
+        datasets: [{
+
+            label: "Portfolio Value",
+
+            data: [20000,25000,27000,31000,35000,42000],
+
+            borderColor: "#0d2b7e",
+
+            backgroundColor: "rgba(13,43,126,0.15)",
+
+            fill: true,
+
+            tension: 0.4
+
+        }]
+
+    }
+
+});
+
+// Asset Allocation Chart
+
+new Chart(document.getElementById("allocationChart"), {
+
+    type: "pie",
+
+    data: {
+
+        labels: [
+
+            "Stocks",
+
+            "Mutual Funds",
+
+            "Gold",
+
+            "Fixed Deposits",
+
+            "Bonds",
+
+            "Real Estate",
+
+            "Crypto"
+
+        ],
+
+        datasets: [{
+
+            data: [
+
+                {{ stocks }},
+
+                {{ mutual }},
+
+                {{ gold }},
+
+                {{ fd }},
+
+                {{ bonds }},
+
+                {{ realestate }},
+
+                {{ crypto }}
+
+            ]
+
+        }]
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

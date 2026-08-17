@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Reports</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body{
+            background:#f4f6f9;
+            font-family:Arial;
+            padding:40px;
+        }
+
+        .cards{
+            display:flex;
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            width:250px;
+            box-shadow:0 0 10px lightgray;
+        }
+
+        .chart{
+            margin-top:40px;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+        }
+    </style>
+</head>
+<body>
+{% include 'sidebar.html' %}
+<h1>Financial Reports</h1>
+
+<br>
+
+<a href="/export_pdf">
+
+<button>
+
+📄 Export PDF
+
+</button>
+
+</a>
+
+<br><br>
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Income</h3>
+        <h2>₹{{ income }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Expenses</h3>
+        <h2>₹{{ expense }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Savings</h3>
+        <h2>₹{{ savings }}</h2>
+    </div>
+
+</div>
+
+<div class="chart">
+    <canvas id="reportChart"></canvas>
+</div>
+
+<script>
+new Chart(
+    document.getElementById('reportChart'),
+    {
+        type:'bar',
+        data:{
+            labels:['Income','Expenses','Savings'],
+            datasets:[{
+                label:'Financial Summary',
+                data:[
+                    {{ income }},
+                    {{ expense }},
+                    {{ savings }}
+                ]
+            }]
+        }
+    }
+);
+</script>
+
+</body>
+</html>

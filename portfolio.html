@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Investment Portfolio</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/portfolio.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>Smart Finance</h2>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+
+        <a href="/portfolio">📈 Investment Portfolio</a>
+
+        <a href="/goals">🎯 Financial Goals</a>
+
+        <a href="/reports">📑 Reports</a>
+
+        <a href="/analytics">📊 Analytics</a>
+
+        <a href="/insights">🤖 AI Insights</a>
+
+        <a href="/health">❤️ Health Score</a>
+
+        <a href="/logout">🚪 Logout</a>
+
+    </div>
+
+    <div class="main">
+
+        <h1>Investment Portfolio</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Investment</h3>
+                <h2>₹{{ total_investment }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Current Value</h3>
+                <h2>₹{{ current_value }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Profit / Loss</h3>
+                <h2>₹{{ profit }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>ROI</h3>
+                <h2>{{ roi }}%</h2>
+            </div>
+
+        </div>
+
+        <div class="form-box">
+
+            <h2>Add Investment</h2>
+
+            <form method="POST">
+
+                <input
+                type="text"
+                name="asset_name"
+                placeholder="Asset Name"
+                required>
+
+                <select
+                name="category"
+                required>
+
+                    <option>Stocks</option>
+                    <option>Mutual Funds</option>
+                    <option>Gold</option>
+                    <option>Fixed Deposits</option>
+                    <option>Bonds</option>
+                    <option>Real Estate</option>
+                    <option>Cryptocurrency</option>
+
+                </select>
+
+                <input
+                type="number"
+                name="invested_amount"
+                placeholder="Invested Amount"
+                required>
+
+                <input
+                type="number"
+                name="current_value"
+                placeholder="Current Value"
+                required>
+
+                <input
+                type="date"
+                name="purchase_date"
+                required>
+
+                <button type="submit">
+
+                    Add Investment
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="table-box">
+
+            <table>
+
+                <tr>
+
+                    <th>Asset</th>
+
+                    <th>Category</th>
+
+                    <th>Investment</th>
+
+                    <th>Current Value</th>
+
+                    <th>Date</th>
+
+                </tr>
+
+                {% for item in portfolio %}
+
+                <tr>
+
+                    <td>{{ item.asset_name }}</td>
+
+                    <td>{{ item.category }}</td>
+
+                    <td>₹{{ item.invested_amount }}</td>
+
+                    <td>₹{{ item.current_value }}</td>
+
+                    <td>{{ item.purchase_date }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

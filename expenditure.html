@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Management</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/expense.css') }}">
+</head>
+<body>
+{% include 'sidebar.html' %}
+<div class="container">
+
+    <h1>Expense Management</h1>
+    <form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by Category"
+        value="{{ request.args.get('search', '') }}"
+    >
+
+    <button type="submit">Search</button>
+
+</form>
+
+<br>
+
+    <form method="POST">
+
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Medical</option>
+            <option>Entertainment</option>
+            <option>Others</option>
+        </select>
+
+        <input
+            type="number"
+            name="amount"
+            placeholder="Amount"
+            required>
+
+        <input
+            type="date"
+            name="date"
+            required>
+
+        <button type="submit">
+            Add Expense
+        </button>
+
+    </form>
+
+    <h2>Expense History</h2>
+
+    <table>
+
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e['category'] }}</td>
+            <td>₹{{ e['amount'] }}</td>
+            <td>{{ e['date'] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

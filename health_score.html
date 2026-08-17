@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Health Score</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f6f9;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .card{
+            background:white;
+            width:500px;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 5px 20px lightgray;
+        }
+
+        .circle{
+            width:180px;
+            height:180px;
+            border-radius:50%;
+            border:12px solid #0d2b7e;
+            margin:auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:40px;
+            font-weight:bold;
+            color:#0d2b7e;
+        }
+
+        h1{
+            color:#0d2b7e;
+        }
+    </style>
+</head>
+<body>
+{% include 'sidebar.html' %}
+<div class="card">
+
+    <h1>Financial Health Score</h1>
+
+    <div class="circle">
+        {{ score }}%
+    </div>
+
+    <br>
+
+    {% if score >= 80 %}
+        <h2>Excellent Financial Health</h2>
+    {% elif score >= 60 %}
+        <h2>Good Financial Health</h2>
+    {% else %}
+        <h2>Needs Improvement</h2>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
